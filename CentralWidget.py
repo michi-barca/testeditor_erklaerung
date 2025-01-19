@@ -35,6 +35,23 @@ class CentralWidget(QWidget):  # Unsere Hauptklasse, die von QWidget erbt
         # --- Layout setzen ---
         self.setLayout(layout)  # Das Hauptlayout als Layout für das Widget festlegen
 
+        bar_layout = QHBoxLayout()
+
+        # --- Buttons erstellen ---
+        self.__pushbutton_undo = QPushButton('Undo')  # Neuer Undo-Button
+
+        # --- Buttons mit Funktionen verbinden ---
+        self.__pushbutton_undo.pressed.connect(self.undo)  # Verbindung zur Undo-Funktion
+
+        # --- Buttons zum Layout hinzufügen ---
+        bar_layout.addWidget(self.__pushbutton_undo)  # Undo-Button hinzufügen
+
+        # --- Funktion für Undo ---
+
+    @pyqtSlot()
+    def undo(self):
+        self.__text_edit.undo()
+
     # --- Funktion, um den Text im Textfeld zu setzen ---
     @pyqtSlot(str)  # Slot, der einen Textstring erwartet
     def set_text(self, text):

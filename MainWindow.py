@@ -68,6 +68,14 @@ class MainWindow(QMainWindow):
         # Aktion "Font" zum Öffnen des Schriftarten-Dialogs
         action_font = font.addAction("Font")
         action_font.triggered.connect(self.font)  # Ruft die Methode zum Auswählen einer Schriftart auf
+        edit = QMenu("Edit", menu_bar)
+
+        # Aktion "Undo" zum Rückgängigmachen der letzten Aktion
+        action_undo = edit.addAction("Undo")
+        action_undo.triggered.connect(self.__central_widget.undo)  # Verbindung zur Undo-Funktion im CentralWidget
+
+        # Fügt das "Edit"-Menü der Menüleiste hinzu
+        menu_bar.addMenu(edit)
 
         # Fügt das "Font"-Menü der Menüleiste hinzu
         menu_bar.addMenu(font)
